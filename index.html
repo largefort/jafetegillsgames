@@ -14,44 +14,57 @@
   <div id="games-list" class="container"></div>
 
   <script>
-    // Function to fetch games data from Google Play Store via proxy
-    async function fetchGames() {
-      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-      const url = 'https://api.rss2json.com/v1/api.json?rss_url=https://play.google.com/store/apps/developer?id=5593661644576786185';
-      const response = await fetch(proxyUrl + url);
-      const data = await response.json();
-      return data.items;
-    }
-
-    // Function to display games on the webpage
-    async function displayGames() {
-      try {
-        const games = await fetchGames();
-        const gamesList = document.getElementById('games-list');
-
-        games.forEach(game => {
-          const gameDiv = document.createElement('div');
-          gameDiv.classList.add('game');
-
-          const title = document.createElement('h2');
-          title.textContent = game.title;
-          gameDiv.appendChild(title);
-
-          const icon = document.createElement('img');
-          icon.src = game.thumbnail;
-          icon.alt = game.title + ' icon';
-          gameDiv.appendChild(icon);
-
-          const link = document.createElement('a');
-          link.href = game.link;
-          link.textContent = 'View on Google Play';
-          gameDiv.appendChild(link);
-
-          gamesList.appendChild(gameDiv);
-        });
-      } catch (error) {
-        console.error('Error fetching games:', error);
+    const games = [
+      {
+        title: "Idle Particle Clicker",
+        iconUrl: "https://play-lh.googleusercontent.com/UrXdM02zq8JiU5h5HzsNBpIRX1AilUvNriW-tCjuCLtC2Z75b6GnGFeJJM81j6gqRJw=s180",
+        link: "https://play.google.com/store/apps/details?id=com.jafetegill.particleclicker&hl=en&gl=US"
+      },
+      {
+        title: "Medieval Civilizations",
+        iconUrl: "https://play-lh.googleusercontent.com/IUwbBqzri8HK4AC9IyR4z3b5dZy8iGk0UEePqG_7jPSg6uh2W7a5J_XkmEkHXz1yXeI=s180",
+        link: "https://play.google.com/store/apps/details?id=com.jafetegill.medievalcivilizations.web&hl=en&gl=US"
+      },
+      {
+        title: "JQeBaJ",
+        iconUrl: "https://play-lh.googleusercontent.com/4MsF1FCT6t0tnj8iwsHXDNtN4zHtusZz_MiZjqlLyb3LCbrgFQO_7rnmSLaGnldNpA=s180",
+        link: "https://play.google.com/store/apps/details?id=co.median.android.jqebaj&hl=en&gl=US"
+      },
+      {
+        title: "Jump My King",
+        iconUrl: "https://play-lh.googleusercontent.com/5kxysJY0WHX6PEvrbVmqRfZO2BFrAn2R9U0jF1uVG2dbxK02pIu8I01vONX5ws2aIA=s180",
+        link: "https://play.google.com/store/apps/details?id=com.jafetegill.jumpmyking&hl=en&gl=US"
+      },
+      {
+        title: "Idle Cash Tycoon",
+        iconUrl: "https://play-lh.googleusercontent.com/0IFz7eXZ0k9TKD3zO3dg-o5QsClKEDXApjaHgKPhldVXvA7qR-e9fgHc4XKUZLbFjPg=s180",
+        link: "https://play.google.com/store/apps/details?id=com.jafetegill.idlecashtycoon&hl=en&gl=US"
       }
+    ];
+
+    function displayGames() {
+      const gamesList = document.getElementById('games-list');
+
+      games.forEach(game => {
+        const gameDiv = document.createElement('div');
+        gameDiv.classList.add('game');
+
+        const title = document.createElement('h2');
+        title.textContent = game.title;
+        gameDiv.appendChild(title);
+
+        const icon = document.createElement('img');
+        icon.src = game.iconUrl;
+        icon.alt = game.title + ' icon';
+        gameDiv.appendChild(icon);
+
+        const link = document.createElement('a');
+        link.href = game.link;
+        link.textContent = 'View on Google Play';
+        gameDiv.appendChild(link);
+
+        gamesList.appendChild(gameDiv);
+      });
     }
 
     displayGames();
